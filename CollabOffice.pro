@@ -62,6 +62,9 @@ HEADERS += \
     src/modules/admin/AdminModule.h \
     src/modules/browser/DocumentBrowserModule.h \
     src/modules/writer/WriterModule.h \
+    src/modules/writer/PageRulerWidget.h \
+    src/modules/writer/StyleGalleryWidget.h \
+    src/modules/writer/WriterInsertTabHandler.h \
     src/ui/MainWindow.h \
     src/ui/dialogs/SetupWizardDialog.h \
     src/ui/dialogs/LoginDialog.h \
@@ -76,6 +79,9 @@ SOURCES += \
     src/modules/admin/AdminModule.cpp \
     src/modules/browser/DocumentBrowserModule.cpp \
     src/modules/writer/WriterModule.cpp \
+    src/modules/writer/PageRulerWidget.cpp \
+    src/modules/writer/StyleGalleryWidget.cpp \
+    src/modules/writer/WriterInsertTabHandler.cpp \
     src/ui/MainWindow.cpp \
     src/ui/dialogs/SetupWizardDialog.cpp \
     src/ui/dialogs/LoginDialog.cpp \

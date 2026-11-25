@@ -231,12 +231,18 @@ void MainWindow::registerModule(IWorkspaceModule *module, bool activateImmediate
     QWidget *widget = module->centralWidget();
     widget->setProperty("moduleId", module->moduleId());
 
+    const int prevIndex = m_workspaceTabs->currentIndex();
     const int tabIdx = m_workspaceTabs->addTab(widget, module->moduleIcon(), module->displayTitle());
+
     if (activateImmediately) {
-        m_workspaceTabs->setCurrentIndex(tabIdx);
-        rebuildCommandAreaForModule(module);
-        updateContextualDockForModule(module);
-        m_lblModuleStatus->setText(module->statusSummary());
+        if (prevIndex != tabIdx) {
+            // Triggers currentChanged -> onTabChanged(), rebuilding Ribbon, Dock and StatusBar once
+            m_workspaceTabs->setCurrentIndex(tabIdx);
+        } else {
+            rebuildCommandAreaForModule(module);
+            updateContextualDockForModule(module);
+            m_lblModuleStatus->setText(module->statusSummary());
+        }
     }
 }
 
@@ -456,6 +462,15 @@ void MainWindow::rebuildCommandAreaForModule(IWorkspaceModule *module)
 
 void MainWindow::buildRibbonForModule(IWorkspaceModule *module)
 {
+    // Detach persistent module widgets so deleting temporary Ribbon pages never frees them
+    for (QWidget *customW : std::as_const(m_activeRibbonCustomWidgets)) {
+        if (customW) {
+            customW->hide();
+            customW->setParent(nullptr);
+        }
+    }
+    m_activeRibbonCustomWidgets.clear();
+
     while (m_ribbonTabWidget->count() > 0) {
         QWidget *page = m_ribbonTabWidget->widget(0);
         m_ribbonTabWidget->removeTab(0);
@@ -474,38 +489,46 @@ void MainWindow::buildRibbonForModule(IWorkspaceModule *module)
         if (!rowLayout) {
             QWidget *tabPage = new QWidget(m_ribbonTabWidget);
             rowLayout = new QHBoxLayout(tabPage);
-            rowLayout->setContentsMargins(6, 4, 6, 4);
-            rowLayout->setSpacing(8);
+            rowLayout->setContentsMargins(6, 3, 6, 3);
+            rowLayout->setSpacing(6);
             rowLayout->addStretch(1);
             m_ribbonTabWidget->addTab(tabPage, group.tabTitle);
             tabLayouts.insert(group.tabTitle, rowLayout);
         }
 
         QFrame *groupBox = new QFrame();
-        groupBox->setFrameShape(QFrame::StyledPanel);
+        groupBox->setObjectName(QStringLiteral("RibbonGroupFrame"));
         QVBoxLayout *groupVBox = new QVBoxLayout(groupBox);
-        groupVBox->setContentsMargins(6, 2, 6, 2);
+        groupVBox->setContentsMargins(6, 2, 6, 1);
         groupVBox->setSpacing(2);
 
-        QHBoxLayout *buttonsRow = new QHBoxLayout();
-        buttonsRow->setSpacing(4);
-        for (QAction *act : group.actions) {
-            if (!act) {
-                continue;
+        if (group.customWidget) {
+            m_activeRibbonCustomWidgets.append(group.customWidget);
+            group.customWidget->setParent(groupBox);
+            group.customWidget->show();
+            groupVBox->addWidget(group.customWidget, 1);
+        } else {
+            QHBoxLayout *buttonsRow = new QHBoxLayout();
+            buttonsRow->setSpacing(3);
+            for (QAction *act : group.actions) {
+                if (!act) {
+                    continue;
+                }
+                QToolButton *btn = new QToolButton(groupBox);
+                btn->setDefaultAction(act);
+                btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+                btn->setAutoRaise(true);
+                buttonsRow->addWidget(btn);
             }
-            QToolButton *btn = new QToolButton(groupBox);
-            btn->setDefaultAction(act);
-            btn->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-            btn->setAutoRaise(true);
-            buttonsRow->addWidget(btn);
+            groupVBox->addLayout(buttonsRow, 1);
         }
 
-        QLabel *lblGroup = new QLabel(group.groupTitle, groupBox);
-        lblGroup->setAlignment(Qt::AlignCenter);
-        lblGroup->setObjectName(QStringLiteral("RibbonGroupCaption"));
-
-        groupVBox->addLayout(buttonsRow);
-        groupVBox->addWidget(lblGroup);
+        if (!group.groupTitle.isEmpty()) {
+            QLabel *lblGroup = new QLabel(group.groupTitle, groupBox);
+            lblGroup->setAlignment(Qt::AlignCenter);
+            lblGroup->setObjectName(QStringLiteral("RibbonGroupCaption"));
+            groupVBox->addWidget(lblGroup);
+        }
 
         rowLayout->insertWidget(rowLayout->count() - 1, groupBox);
     }
@@ -617,24 +640,27 @@ void MainWindow::applyCorporateStyleSheet()
 {
     setStyleSheet(QStringLiteral(R"(
         QMainWindow {
-            background-color: #F3F5F8;
+            background-color: #1E1E1E;
+            color: #E2E8F0;
         }
         QToolBar#TopShellHeaderBar {
-            background-color: #1E293B;
-            border: none;
+            background-color: #18181B;
+            border-bottom: 1px solid #2E2E32;
             spacing: 6px;
             padding: 4px 8px;
         }
-        QToolBar#TopShellHeaderBar QPushButton {
-            background-color: #334155;
-            color: #F8FAFC;
-            border: 1px solid #475569;
+        QToolBar#TopShellHeaderBar QPushButton,
+        QToolBar#TopShellHeaderBar QComboBox {
+            background-color: #27272A;
+            color: #F4F4F5;
+            border: 1px solid #3F3F46;
             border-radius: 4px;
-            padding: 5px 10px;
-            font-weight: 600;
+            padding: 4px 9px;
+            font-size: 12px;
         }
-        QToolBar#TopShellHeaderBar QPushButton:hover {
-            background-color: #3B82F6;
+        QToolBar#TopShellHeaderBar QPushButton:hover,
+        QToolBar#TopShellHeaderBar QComboBox:hover {
+            background-color: #3F3F46;
             border-color: #60A5FA;
         }
         QPushButton#LogoutButton {
@@ -642,31 +668,102 @@ void MainWindow::applyCorporateStyleSheet()
             border-color: #991B1B;
         }
         QPushButton#LogoutButton:hover {
-            background-color: #DC2626;
-            border-color: #EF4444;
+            background-color: #B91C1C;
         }
         QPushButton#ConnectionBadge[statusLevel="online"] {
-            background-color: #15803D;
+            background-color: #14532D;
             border-color: #22C55E;
         }
         QPushButton#ConnectionBadge[statusLevel="offline"] {
-            background-color: #B45309;
+            background-color: #78350F;
             border-color: #F59E0B;
         }
         QPushButton#ConnectionBadge[statusLevel="pending"] {
-            background-color: #1D4ED8;
+            background-color: #1E3A8A;
             border-color: #60A5FA;
         }
         QWidget#CommandHostWidget {
-            background-color: #FFFFFF;
-            border-bottom: 1px solid #CBD5E1;
+            background-color: #262629;
+            border-bottom: 1px solid #38383D;
+        }
+        QTabWidget#RibbonTabWidget::pane {
+            border: none;
+            background-color: #2B2B2F;
+        }
+        QTabWidget#RibbonTabWidget QTabBar::tab {
+            background-color: transparent;
+            color: #CBD5E1;
+            padding: 5px 14px;
+            margin-right: 2px;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        QTabWidget#RibbonTabWidget QTabBar::tab:hover {
+            color: #FFFFFF;
+            background-color: #333338;
+        }
+        QTabWidget#RibbonTabWidget QTabBar::tab:selected {
+            color: #FFFFFF;
+            border-bottom: 2px solid #3B82F6;
+            font-weight: 600;
+        }
+        QFrame#RibbonGroupFrame {
+            border-right: 1px solid #3F3F46;
+            background-color: transparent;
+        }
+        QFrame#RibbonGroupFrame QToolButton {
+            color: #E4E4E7;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            padding: 2px 4px;
+        }
+        QFrame#RibbonGroupFrame QToolButton:hover {
+            background-color: #3F3F46;
+            border-color: #52525B;
+        }
+        QFrame#RibbonGroupFrame QToolButton:checked {
+            background-color: #1D4ED8;
+            border-color: #60A5FA;
+            color: #FFFFFF;
         }
         QLabel#RibbonGroupCaption {
-            color: #64748B;
+            color: #9CA3AF;
             font-size: 10px;
         }
-        QDockWidget {
+        QTabWidget::pane {
+            border: none;
+            background-color: #202023;
+        }
+        QTabBar::tab {
+            background-color: #27272A;
+            color: #A1A1AA;
+            padding: 6px 14px;
+            border-right: 1px solid #3F3F46;
+        }
+        QTabBar::tab:selected {
+            background-color: #323236;
+            color: #FFFFFF;
             font-weight: 600;
+        }
+        QDockWidget {
+            background-color: #252528;
+            color: #E4E4E7;
+            titlebar-close-icon: none;
+        }
+        QDockWidget::title {
+            background-color: #1F1F22;
+            padding: 6px;
+            border-bottom: 1px solid #38383D;
+        }
+        QStatusBar {
+            background-color: #18181B;
+            color: #A1A1AA;
+            border-top: 1px solid #2E2E32;
+        }
+        QStatusBar QLabel {
+            color: #CBD5E1;
+            font-size: 11px;
         }
     )"));
 }

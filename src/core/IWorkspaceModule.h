@@ -11,6 +11,7 @@ struct CommandGroupSpec {
     QString tabTitle;          // Ribbon tab title or top-level Classic menu title
     QString groupTitle;        // Ribbon section group or Classic toolbar section
     QList<QAction *> actions;  // Actions owned by the module
+    QWidget *customWidget = nullptr; // Optional rich Ribbon widget (2-row controls, style gallery, etc.)
 };
 
 class IWorkspaceModule
@@ -32,6 +33,7 @@ public:
 
     // Optional right-hand contextual panel (styles, cell inspector, comments, permissions)
     virtual QWidget *contextualDockWidget() { return nullptr; }
+    virtual QWidget *statusBarWidget() { return nullptr; }
 
     // Declarative command groups rendered by MainWindow as Ribbon tabs or Classic menus/toolbars
     virtual QList<CommandGroupSpec> commandGroups() const = 0;

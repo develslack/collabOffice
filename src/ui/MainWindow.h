@@ -109,6 +109,7 @@ private:
 
     QWidget *m_commandHostWidget;
     QTabWidget *m_ribbonTabWidget;
+    QList<QWidget *> m_activeRibbonCustomWidgets;
     QMenuBar *m_classicMenuBar;
     QToolBar *m_classicToolBar;
 

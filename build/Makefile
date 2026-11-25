@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_DISABLE_DEPRECATED_BEFORE=0x050D00 -DAPP_NAME="\"CollabOffice\"" -DAPP_VERSION="\"0.1.0\"" -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../collabOffice -I. -I../src -I../src/core -I../src/core/i18n -I../src/core/db -I../src/core/security -I../src/core/mail -I../src/core/sync -I../src/modules -I../src/modules/admin -I../src/modules/browser -I../src/modules/writer -I../src/modules/calc -I../src/modules/migration -I../src/ui -I../src/ui/dialogs -I../src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I.moc -I/usr/lib64/qt5/mkspecs/linux-g++
+INCPATH       = -I../../collabOffice -I. -I../src -I../src/core -I../src/core/i18n -I../src/core/db -I../src/core/security -I../src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I../src/modules -I../src/modules/admin -I../src/modules/browser -I../src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I../src/ui -I../src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I.moc -I/usr/lib64/qt5/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake-qt5
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = CollabOffice0.1.0
-DISTDIR = /home/augusto/projects/QT/collabOffice/build/.obj/CollabOffice0.1.0
+DISTDIR = /mnt/storage/desarrollo/QT/collabOffice/build/.obj/CollabOffice0.1.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,'$$ORIGIN/../libs' -Wl,-rpath,/usr/lib64
 LIBS          = $(SUBLIBS) /usr/lib64/libQt5PrintSupport.so /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5Sql.so /usr/lib64/libQt5Network.so /usr/lib64/libQt5Core.so -lGL -lpthread   
@@ -60,6 +60,9 @@ SOURCES       = ../src/core/i18n/LanguageManager.cpp \
 		../src/modules/admin/AdminModule.cpp \
 		../src/modules/browser/DocumentBrowserModule.cpp \
 		../src/modules/writer/WriterModule.cpp \
+		../src/modules/writer/PageRulerWidget.cpp \
+		../src/modules/writer/StyleGalleryWidget.cpp \
+		../src/modules/writer/WriterInsertTabHandler.cpp \
 		../src/ui/MainWindow.cpp \
 		../src/ui/dialogs/SetupWizardDialog.cpp \
 		../src/ui/dialogs/LoginDialog.cpp \
@@ -70,6 +73,9 @@ SOURCES       = ../src/core/i18n/LanguageManager.cpp \
 		.moc/moc_AdminModule.cpp \
 		.moc/moc_DocumentBrowserModule.cpp \
 		.moc/moc_WriterModule.cpp \
+		.moc/moc_PageRulerWidget.cpp \
+		.moc/moc_StyleGalleryWidget.cpp \
+		.moc/moc_WriterInsertTabHandler.cpp \
 		.moc/moc_MainWindow.cpp \
 		.moc/moc_SetupWizardDialog.cpp \
 		.moc/moc_LoginDialog.cpp \
@@ -82,6 +88,9 @@ OBJECTS       = .obj/LanguageManager.o \
 		.obj/AdminModule.o \
 		.obj/DocumentBrowserModule.o \
 		.obj/WriterModule.o \
+		.obj/PageRulerWidget.o \
+		.obj/StyleGalleryWidget.o \
+		.obj/WriterInsertTabHandler.o \
 		.obj/MainWindow.o \
 		.obj/SetupWizardDialog.o \
 		.obj/LoginDialog.o \
@@ -93,6 +102,9 @@ OBJECTS       = .obj/LanguageManager.o \
 		.obj/moc_AdminModule.o \
 		.obj/moc_DocumentBrowserModule.o \
 		.obj/moc_WriterModule.o \
+		.obj/moc_PageRulerWidget.o \
+		.obj/moc_StyleGalleryWidget.o \
+		.obj/moc_WriterInsertTabHandler.o \
 		.obj/moc_MainWindow.o \
 		.obj/moc_SetupWizardDialog.o \
 		.obj/moc_LoginDialog.o \
@@ -470,6 +482,9 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		../src/modules/admin/AdminModule.h \
 		../src/modules/browser/DocumentBrowserModule.h \
 		../src/modules/writer/WriterModule.h \
+		../src/modules/writer/PageRulerWidget.h \
+		../src/modules/writer/StyleGalleryWidget.h \
+		../src/modules/writer/WriterInsertTabHandler.h \
 		../src/ui/MainWindow.h \
 		../src/ui/dialogs/SetupWizardDialog.h \
 		../src/ui/dialogs/LoginDialog.h \
@@ -481,6 +496,9 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		../src/modules/admin/AdminModule.cpp \
 		../src/modules/browser/DocumentBrowserModule.cpp \
 		../src/modules/writer/WriterModule.cpp \
+		../src/modules/writer/PageRulerWidget.cpp \
+		../src/modules/writer/StyleGalleryWidget.cpp \
+		../src/modules/writer/WriterInsertTabHandler.cpp \
 		../src/ui/MainWindow.cpp \
 		../src/ui/dialogs/SetupWizardDialog.cpp \
 		../src/ui/dialogs/LoginDialog.cpp \
@@ -1246,8 +1264,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../translations/lang_es.ts ../translations/lang_en.ts $(DISTDIR)/
 	$(COPY_FILE) --parents ../resources/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/core/QtCompat.h ../src/core/IWorkspaceModule.h ../src/core/i18n/LanguageManager.h ../src/core/db/BootstrapManager.h ../src/core/db/DatabaseManager.h ../src/core/security/PasswordUtils.h ../src/core/mail/SmtpClient.h ../src/modules/admin/AdminModule.h ../src/modules/browser/DocumentBrowserModule.h ../src/modules/writer/WriterModule.h ../src/ui/MainWindow.h ../src/ui/dialogs/SetupWizardDialog.h ../src/ui/dialogs/LoginDialog.h ../src/ui/dialogs/ChangePasswordDialog.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/core/i18n/LanguageManager.cpp ../src/core/db/BootstrapManager.cpp ../src/core/db/DatabaseManager.cpp ../src/core/security/PasswordUtils.cpp ../src/core/mail/SmtpClient.cpp ../src/modules/admin/AdminModule.cpp ../src/modules/browser/DocumentBrowserModule.cpp ../src/modules/writer/WriterModule.cpp ../src/ui/MainWindow.cpp ../src/ui/dialogs/SetupWizardDialog.cpp ../src/ui/dialogs/LoginDialog.cpp ../src/ui/dialogs/ChangePasswordDialog.cpp ../src/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/core/QtCompat.h ../src/core/IWorkspaceModule.h ../src/core/i18n/LanguageManager.h ../src/core/db/BootstrapManager.h ../src/core/db/DatabaseManager.h ../src/core/security/PasswordUtils.h ../src/core/mail/SmtpClient.h ../src/modules/admin/AdminModule.h ../src/modules/browser/DocumentBrowserModule.h ../src/modules/writer/WriterModule.h ../src/modules/writer/PageRulerWidget.h ../src/modules/writer/StyleGalleryWidget.h ../src/modules/writer/WriterInsertTabHandler.h ../src/ui/MainWindow.h ../src/ui/dialogs/SetupWizardDialog.h ../src/ui/dialogs/LoginDialog.h ../src/ui/dialogs/ChangePasswordDialog.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/core/i18n/LanguageManager.cpp ../src/core/db/BootstrapManager.cpp ../src/core/db/DatabaseManager.cpp ../src/core/security/PasswordUtils.cpp ../src/core/mail/SmtpClient.cpp ../src/modules/admin/AdminModule.cpp ../src/modules/browser/DocumentBrowserModule.cpp ../src/modules/writer/WriterModule.cpp ../src/modules/writer/PageRulerWidget.cpp ../src/modules/writer/StyleGalleryWidget.cpp ../src/modules/writer/WriterInsertTabHandler.cpp ../src/ui/MainWindow.cpp ../src/ui/dialogs/SetupWizardDialog.cpp ../src/ui/dialogs/LoginDialog.cpp ../src/ui/dialogs/ChangePasswordDialog.cpp ../src/main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../translations/lang_es.ts ../translations/lang_en.ts $(DISTDIR)/
 
 
@@ -1293,20 +1311,20 @@ compiler_moc_predefs_clean:
 .moc/moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -dM -E -o .moc/moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: .moc/moc_LanguageManager.cpp .moc/moc_DatabaseManager.cpp .moc/moc_AdminModule.cpp .moc/moc_DocumentBrowserModule.cpp .moc/moc_WriterModule.cpp .moc/moc_MainWindow.cpp .moc/moc_SetupWizardDialog.cpp .moc/moc_LoginDialog.cpp .moc/moc_ChangePasswordDialog.cpp
+compiler_moc_header_make_all: .moc/moc_LanguageManager.cpp .moc/moc_DatabaseManager.cpp .moc/moc_AdminModule.cpp .moc/moc_DocumentBrowserModule.cpp .moc/moc_WriterModule.cpp .moc/moc_PageRulerWidget.cpp .moc/moc_StyleGalleryWidget.cpp .moc/moc_WriterInsertTabHandler.cpp .moc/moc_MainWindow.cpp .moc/moc_SetupWizardDialog.cpp .moc/moc_LoginDialog.cpp .moc/moc_ChangePasswordDialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) .moc/moc_LanguageManager.cpp .moc/moc_DatabaseManager.cpp .moc/moc_AdminModule.cpp .moc/moc_DocumentBrowserModule.cpp .moc/moc_WriterModule.cpp .moc/moc_MainWindow.cpp .moc/moc_SetupWizardDialog.cpp .moc/moc_LoginDialog.cpp .moc/moc_ChangePasswordDialog.cpp
+	-$(DEL_FILE) .moc/moc_LanguageManager.cpp .moc/moc_DatabaseManager.cpp .moc/moc_AdminModule.cpp .moc/moc_DocumentBrowserModule.cpp .moc/moc_WriterModule.cpp .moc/moc_PageRulerWidget.cpp .moc/moc_StyleGalleryWidget.cpp .moc/moc_WriterInsertTabHandler.cpp .moc/moc_MainWindow.cpp .moc/moc_SetupWizardDialog.cpp .moc/moc_LoginDialog.cpp .moc/moc_ChangePasswordDialog.cpp
 .moc/moc_LanguageManager.cpp: ../src/core/i18n/LanguageManager.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/core/i18n/LanguageManager.h -o .moc/moc_LanguageManager.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/core/i18n/LanguageManager.h -o .moc/moc_LanguageManager.cpp
 
 .moc/moc_DatabaseManager.cpp: ../src/core/db/DatabaseManager.h \
 		../src/core/db/BootstrapManager.h \
 		../src/core/mail/SmtpClient.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/core/db/DatabaseManager.h -o .moc/moc_DatabaseManager.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/core/db/DatabaseManager.h -o .moc/moc_DatabaseManager.cpp
 
 .moc/moc_AdminModule.cpp: ../src/modules/admin/AdminModule.h \
 		../src/core/IWorkspaceModule.h \
@@ -1315,7 +1333,7 @@ compiler_moc_header_clean:
 		../src/core/mail/SmtpClient.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/admin/AdminModule.h -o .moc/moc_AdminModule.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/admin/AdminModule.h -o .moc/moc_AdminModule.cpp
 
 .moc/moc_DocumentBrowserModule.cpp: ../src/modules/browser/DocumentBrowserModule.h \
 		../src/core/IWorkspaceModule.h \
@@ -1324,16 +1342,36 @@ compiler_moc_header_clean:
 		../src/core/mail/SmtpClient.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/browser/DocumentBrowserModule.h -o .moc/moc_DocumentBrowserModule.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/browser/DocumentBrowserModule.h -o .moc/moc_DocumentBrowserModule.cpp
 
 .moc/moc_WriterModule.cpp: ../src/modules/writer/WriterModule.h \
 		../src/core/IWorkspaceModule.h \
 		../src/core/db/DatabaseManager.h \
 		../src/core/db/BootstrapManager.h \
 		../src/core/mail/SmtpClient.h \
+		../src/modules/writer/StyleGalleryWidget.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/writer/WriterModule.h -o .moc/moc_WriterModule.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/writer/WriterModule.h -o .moc/moc_WriterModule.cpp
+
+.moc/moc_PageRulerWidget.cpp: ../src/modules/writer/PageRulerWidget.h \
+		.moc/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/writer/PageRulerWidget.h -o .moc/moc_PageRulerWidget.cpp
+
+.moc/moc_StyleGalleryWidget.cpp: ../src/modules/writer/StyleGalleryWidget.h \
+		.moc/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/writer/StyleGalleryWidget.h -o .moc/moc_StyleGalleryWidget.cpp
+
+.moc/moc_WriterInsertTabHandler.cpp: ../src/modules/writer/WriterInsertTabHandler.h \
+		../src/core/IWorkspaceModule.h \
+		../src/core/db/DatabaseManager.h \
+		../src/core/db/BootstrapManager.h \
+		../src/core/mail/SmtpClient.h \
+		.moc/moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/modules/writer/WriterInsertTabHandler.h -o .moc/moc_WriterInsertTabHandler.cpp
 
 .moc/moc_MainWindow.cpp: ../src/ui/MainWindow.h \
 		../src/core/db/DatabaseManager.h \
@@ -1341,13 +1379,13 @@ compiler_moc_header_clean:
 		../src/core/mail/SmtpClient.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/MainWindow.h -o .moc/moc_MainWindow.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/MainWindow.h -o .moc/moc_MainWindow.cpp
 
 .moc/moc_SetupWizardDialog.cpp: ../src/ui/dialogs/SetupWizardDialog.h \
 		../src/core/db/BootstrapManager.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/SetupWizardDialog.h -o .moc/moc_SetupWizardDialog.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/SetupWizardDialog.h -o .moc/moc_SetupWizardDialog.cpp
 
 .moc/moc_LoginDialog.cpp: ../src/ui/dialogs/LoginDialog.h \
 		../src/core/db/DatabaseManager.h \
@@ -1355,12 +1393,12 @@ compiler_moc_header_clean:
 		../src/core/mail/SmtpClient.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/LoginDialog.h -o .moc/moc_LoginDialog.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/LoginDialog.h -o .moc/moc_LoginDialog.cpp
 
 .moc/moc_ChangePasswordDialog.cpp: ../src/ui/dialogs/ChangePasswordDialog.h \
 		.moc/moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
-	/usr/lib64/qt5/bin/moc $(DEFINES) --include /home/augusto/projects/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/augusto/projects/QT/collabOffice -I/home/augusto/projects/QT/collabOffice/src -I/home/augusto/projects/QT/collabOffice/src/core -I/home/augusto/projects/QT/collabOffice/src/core/i18n -I/home/augusto/projects/QT/collabOffice/src/core/db -I/home/augusto/projects/QT/collabOffice/src/core/security -I/home/augusto/projects/QT/collabOffice/src/core/mail -I/home/augusto/projects/QT/collabOffice/src/core/sync -I/home/augusto/projects/QT/collabOffice/src/modules -I/home/augusto/projects/QT/collabOffice/src/modules/admin -I/home/augusto/projects/QT/collabOffice/src/modules/browser -I/home/augusto/projects/QT/collabOffice/src/modules/writer -I/home/augusto/projects/QT/collabOffice/src/modules/calc -I/home/augusto/projects/QT/collabOffice/src/modules/migration -I/home/augusto/projects/QT/collabOffice/src/ui -I/home/augusto/projects/QT/collabOffice/src/ui/dialogs -I/home/augusto/projects/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/ChangePasswordDialog.h -o .moc/moc_ChangePasswordDialog.cpp
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include /mnt/storage/desarrollo/QT/collabOffice/build/.moc/moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/mnt/storage/desarrollo/QT/collabOffice -I/mnt/storage/desarrollo/QT/collabOffice/src -I/mnt/storage/desarrollo/QT/collabOffice/src/core -I/mnt/storage/desarrollo/QT/collabOffice/src/core/i18n -I/mnt/storage/desarrollo/QT/collabOffice/src/core/db -I/mnt/storage/desarrollo/QT/collabOffice/src/core/security -I/mnt/storage/desarrollo/QT/collabOffice/src/core/mail -I/mnt/storage/desarrollo/QT/collabOffice/src/core/sync -I/mnt/storage/desarrollo/QT/collabOffice/src/modules -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/admin -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/browser -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/writer -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/calc -I/mnt/storage/desarrollo/QT/collabOffice/src/modules/migration -I/mnt/storage/desarrollo/QT/collabOffice/src/ui -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/dialogs -I/mnt/storage/desarrollo/QT/collabOffice/src/ui/widgets -I/usr/include/qt5 -I/usr/include/qt5/QtPrintSupport -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtNetwork -I/usr/include/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-slackware-linux -I/usr/include/c++/11.2.0/backward -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include -I/usr/local/include -I/usr/lib64/gcc/x86_64-slackware-linux/11.2.0/include-fixed -I/usr/include ../src/ui/dialogs/ChangePasswordDialog.h -o .moc/moc_ChangePasswordDialog.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1415,8 +1453,26 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../src/core/IWorkspaceModule.h \
 		../src/core/db/DatabaseManager.h \
 		../src/core/db/BootstrapManager.h \
-		../src/core/mail/SmtpClient.h
+		../src/core/mail/SmtpClient.h \
+		../src/modules/writer/StyleGalleryWidget.h \
+		../src/modules/writer/PageRulerWidget.h \
+		../src/core/QtCompat.h \
+		../src/modules/writer/WriterInsertTabHandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/WriterModule.o ../src/modules/writer/WriterModule.cpp
+
+.obj/PageRulerWidget.o: ../src/modules/writer/PageRulerWidget.cpp ../src/modules/writer/PageRulerWidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/PageRulerWidget.o ../src/modules/writer/PageRulerWidget.cpp
+
+.obj/StyleGalleryWidget.o: ../src/modules/writer/StyleGalleryWidget.cpp ../src/modules/writer/StyleGalleryWidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/StyleGalleryWidget.o ../src/modules/writer/StyleGalleryWidget.cpp
+
+.obj/WriterInsertTabHandler.o: ../src/modules/writer/WriterInsertTabHandler.cpp ../src/modules/writer/WriterInsertTabHandler.h \
+		../src/core/IWorkspaceModule.h \
+		../src/core/db/DatabaseManager.h \
+		../src/core/db/BootstrapManager.h \
+		../src/core/mail/SmtpClient.h \
+		../src/core/QtCompat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/WriterInsertTabHandler.o ../src/modules/writer/WriterInsertTabHandler.cpp
 
 .obj/MainWindow.o: ../src/ui/MainWindow.cpp ../src/ui/MainWindow.h \
 		../src/core/db/DatabaseManager.h \
@@ -1455,7 +1511,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 		../src/modules/admin/AdminModule.h \
 		../src/core/IWorkspaceModule.h \
 		../src/modules/browser/DocumentBrowserModule.h \
-		../src/modules/writer/WriterModule.h
+		../src/modules/writer/WriterModule.h \
+		../src/modules/writer/StyleGalleryWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/main.o ../src/main.cpp
 
 .obj/qrc_resources.o: .rcc/qrc_resources.cpp 
@@ -1475,6 +1532,15 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 .obj/moc_WriterModule.o: .moc/moc_WriterModule.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/moc_WriterModule.o .moc/moc_WriterModule.cpp
+
+.obj/moc_PageRulerWidget.o: .moc/moc_PageRulerWidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/moc_PageRulerWidget.o .moc/moc_PageRulerWidget.cpp
+
+.obj/moc_StyleGalleryWidget.o: .moc/moc_StyleGalleryWidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/moc_StyleGalleryWidget.o .moc/moc_StyleGalleryWidget.cpp
+
+.obj/moc_WriterInsertTabHandler.o: .moc/moc_WriterInsertTabHandler.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/moc_WriterInsertTabHandler.o .moc/moc_WriterInsertTabHandler.cpp
 
 .obj/moc_MainWindow.o: .moc/moc_MainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o .obj/moc_MainWindow.o .moc/moc_MainWindow.cpp
