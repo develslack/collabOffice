@@ -1,0 +1,9 @@
+build/.moc/*
+build/.obj/*
+build/.qm/*
+build/.rcc/*
+build/translations/*
+build/.qmake.stash
+build/CollabOffice
+collabOffice.txt
+git_init.sh
