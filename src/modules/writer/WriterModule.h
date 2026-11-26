@@ -17,6 +17,7 @@ class QSlider;
 class QScrollArea;
 class PageRulerWidget;
 class WriterInsertTabHandler;
+class WriterDrawTabHandler;
 
 class WriterModule : public QObject, public IWorkspaceModule
 {
@@ -169,6 +170,8 @@ private:
 
     QList<QString> m_blockIdsByIndex;
     WriterInsertTabHandler *m_insertHandler;
+
+    WriterDrawTabHandler *m_drawHandler;
 };
 
 #endif // WRITERMODULE_H

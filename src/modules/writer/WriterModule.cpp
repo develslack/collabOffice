@@ -2,6 +2,7 @@
 #include "PageRulerWidget.h"
 #include "QtCompat.h"
 #include "WriterInsertTabHandler.h"
+#include "WriterDrawTabHandler.h"
 
 #include <QTextFrame>
 #include <QTextTable>
@@ -67,6 +68,7 @@ WriterModule::WriterModule(const DocumentSummary &docSummary,
     , m_btnSubmitProposal(nullptr)
     , m_listParagraphAudit(nullptr)
     , m_insertHandler(nullptr)
+    , m_drawHandler(nullptr)
 {
     buildUi();
     buildRibbonWidgets();
@@ -149,6 +151,9 @@ QList<CommandGroupSpec> WriterModule::commandGroups() const
     if (m_insertHandler) {
         groups.append(m_insertHandler->commandGroups());
     }
+    if (m_drawHandler) {
+        groups.append(m_drawHandler->commandGroups());
+    }
     return groups;
 
 }
@@ -173,6 +178,9 @@ bool WriterModule::saveChanges()
 {
     if (isReadOnlyMode()) {
         return true;
+    }
+    if (m_drawHandler && m_drawHandler->hasPendingInk()) {
+        m_drawHandler->commitInkToDocument();
     }
 
     const QList<DocBlockRecord> blocks = extractBlocksFromEditor();
@@ -244,6 +252,9 @@ void WriterModule::retranslateUi()
     }
     if (m_insertHandler) {
         m_insertHandler->retranslateUi();
+    }
+    if (m_drawHandler) {
+        m_drawHandler->retranslateUi();
     }
 
     updateWordAndPageMetrics();
@@ -449,6 +460,9 @@ void WriterModule::buildUi()
 
     // Must be instantiated AFTER m_editor is created
     m_insertHandler = new WriterInsertTabHandler(m_editor, m_doc, m_session, isReadOnlyMode(), this);
+
+    m_drawHandler = new WriterDrawTabHandler(m_editor, isReadOnlyMode(), this);
+    connect(m_drawHandler, &WriterDrawTabHandler::drawingCommitted, this, &WriterModule::onDocumentContentsChanged);
 }
 
 void WriterModule::buildRibbonWidgets()

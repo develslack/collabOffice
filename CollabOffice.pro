@@ -65,6 +65,8 @@ HEADERS += \
     src/modules/writer/PageRulerWidget.h \
     src/modules/writer/StyleGalleryWidget.h \
     src/modules/writer/WriterInsertTabHandler.h \
+    src/modules/writer/PageInkOverlayWidget.h \
+    src/modules/writer/WriterDrawTabHandler.h \
     src/ui/MainWindow.h \
     src/ui/dialogs/SetupWizardDialog.h \
     src/ui/dialogs/LoginDialog.h \
@@ -82,6 +84,8 @@ SOURCES += \
     src/modules/writer/PageRulerWidget.cpp \
     src/modules/writer/StyleGalleryWidget.cpp \
     src/modules/writer/WriterInsertTabHandler.cpp \
+    src/modules/writer/PageInkOverlayWidget.cpp \
+    src/modules/writer/WriterDrawTabHandler.cpp \
     src/ui/MainWindow.cpp \
     src/ui/dialogs/SetupWizardDialog.cpp \
     src/ui/dialogs/LoginDialog.cpp \
